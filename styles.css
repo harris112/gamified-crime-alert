@@ -1,0 +1,118 @@
+#main {
+  margin-top: 80px;
+}
+
+#status {
+  display: none;
+}
+
+.sticky {
+  position: fixed;
+  top: 20;
+  width: 80%
+}
+
+.mdc-button {
+  margin-right: 10px;
+}
+
+#form-map {
+  margin: 2%;
+  height: 60vh;
+  width: 80vw;
+  position: relative;
+  display: none;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#main-map {
+  margin: 2%;
+  height: 85vh;
+  width: 80vw;
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.home-banner {
+  width: 30vw;
+  height: 40vh;
+  margin-bottom: 10px;
+}
+
+.main-banner {
+  width: 35vh;
+  height: 35vh;
+  margin-bottom: 10px;
+}
+
+.navbar-brand {
+  margin-left: 5%;
+}
+
+.card-extra {
+  color: #7A7;
+}
+
+.card-img {
+  width: 20vh;
+  height:20vh;
+  object-fit: cover;
+}
+
+.marker-img {
+  width: 20vh;
+  height:20vh;
+  object-fit: cover;
+}
+
+.nav-link.active {
+  background-color: #111 !important;
+}
+
+a {
+  color: white;
+  padding: 1em 1.5em;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+
+
+.mdc-button--raised.facebook-theme{
+  background-color: #3b5998 !important;
+}
+
+.mdc-button--raised.general {
+  background-color: maroon !important;
+}
+
+
+
+a:hover{
+  color: yellow; 
+}
+
+video {
+  width: 50%;
+  display: block;
+  margin: 0 auto;
+}
+
+#canvas {
+  width: 50%;
+  display: block;
+  margin: 0 auto;
+}
+
+.controls {
+  text-align: center;
+  padding: 0.5em 0;
+  background: #333e5a;
+}
+
+.facebook_theme{
+ background-color: #333e5a;
+ float: right;
+}

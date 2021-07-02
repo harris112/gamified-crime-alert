@@ -1,0 +1,22 @@
+{
+    "theme_color": "#7c0302",
+    "background_color": "#8f324c",
+    "display": "standalone",
+    "scope": "/gamified-crime-alert/",
+    "start_url": "/gamified-crime-alert/index.html",
+    "app_name": "Gamified Crime Alert",
+    "short_name": "Crime Alert",
+    "description": "Report criminal observations in a social community and earn rewards.",
+    "icons": [
+        {
+            "src": "icons/icon-192x192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "icons/icon-310x310.png",
+            "sizes": "310x310",
+            "type": "image/png"
+        }
+    ]
+}
