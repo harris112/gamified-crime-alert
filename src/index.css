@@ -20,6 +20,12 @@ video {
   margin-top: 80px;
 }
 
+.tab-pane {
+  align-self: left;
+  align-content: left;
+  align-items: left;
+}
+
 #status {
   display: none;
 }

@@ -1,12 +1,19 @@
 import React from 'react';
 import './App.css';
 import Home from './components/Home';
-import Alerts from './components/Alerts';
+import AlertView from './components/AlertView';
 import Map from './components/Map';
-import AlertForm from './components/Form';
+import AlertForm from './components/AlertForm';
+
+const loader = new Loader({
+  apiKey: "YOUR_API_KEY",
+  version: "weekly",
+  // ...additionalOptions,
+});
 
 
 function App() {
+
   return (
     <div className="App">
       <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
@@ -39,15 +46,15 @@ function App() {
       </div>
       
       <div id="view" class="tab-pane fade">
-        <Alerts/>
+        <AlertView/>
       </div>
 
       <div id="locate" class="tab-pane fade">
-        <Map/>
+        <Map loader={loader}/>
       </div>
 
       <div id="form" class="tab-pane fade">
-        <AlertForm/>
+        <AlertForm loader={loader}/>
       </div>
 
     <script src="main.js"></script>
