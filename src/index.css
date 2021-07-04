@@ -1,3 +1,21 @@
+
+a {
+  color: white;
+  padding: 1em 1.5em;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+a:hover{
+  color: palegoldenrod; 
+}
+
+video {
+  width: 50%;
+  display: block;
+  margin: 0 auto;
+}
+
 #main {
   margin-top: 80px;
 }
@@ -71,39 +89,12 @@
   background-color: #111 !important;
 }
 
-a {
-  color: white;
-  padding: 1em 1.5em;
-  text-decoration: none;
-  text-transform: uppercase;
-}
-
-
-
 .mdc-button--raised.facebook-theme{
   background-color: #3b5998 !important;
 }
 
 .mdc-button--raised.general {
   background-color: maroon !important;
-}
-
-
-
-a:hover{
-  color: yellow; 
-}
-
-video {
-  width: 50%;
-  display: block;
-  margin: 0 auto;
-}
-
-#canvas {
-  width: 50%;
-  display: block;
-  margin: 0 auto;
 }
 
 .controls {
