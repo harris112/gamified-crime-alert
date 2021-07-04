@@ -5,12 +5,6 @@ import AlertView from './components/AlertView';
 import Map from './components/Map';
 import AlertForm from './components/AlertForm';
 
-const loader = new Loader({
-  apiKey: "YOUR_API_KEY",
-  version: "weekly",
-  // ...additionalOptions,
-});
-
 
 function App() {
 
@@ -50,11 +44,11 @@ function App() {
       </div>
 
       <div id="locate" class="tab-pane fade">
-        <Map loader={loader}/>
+        <Map/>
       </div>
 
       <div id="form" class="tab-pane fade">
-        <AlertForm loader={loader}/>
+        <AlertForm/>
       </div>
 
     <script src="main.js"></script>

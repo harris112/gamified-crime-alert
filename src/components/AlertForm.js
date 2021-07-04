@@ -1,86 +1,13 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
+import {MapComponent} from './MapComponent';
 
-
-let formMap;
 let latitude;
 let longitude;
 
 
-async function updateData() {
-    const card = document.querySelector(".card");
-    const loading = document.querySelector("#loading");
-    const dataView = document.querySelector("#data");
-
-    card.style.display = 'block'; 
-    loading.style.display = 'block';
-    dataView.innerHTML = "";
-    
-    const data = []; //await db.alerts.toArray();
-
-    if (data.length == 0) {
-      dataView.innerHTML = "No alerts found.";
-    }
-
-    let alertsList = []; // markers info list
-
-
-    data.forEach(row => { // item
-      const {name, description, contact_details} = row;
-
-      let cardClone = card.cloneNode(true);
-      let cardBody = cardClone.childNodes[1];
-      let [, cardTitle,, cardSubtitle,, cardImg,, cardText,, cardExtra,] = cardBody.childNodes;
-      cardTitle.innerText = name;
-      cardSubtitle.innerText = row.description ? row.description : '';
-      
-      let cardDetails = `
-      Contact: ${contact_details ? contact_details : ''}
-      `;
-      let contextString =`
-      <h3>${name}</h3>
-      <h5>${description}</h5>
-      <br/>
-      <h6>
-      <b>Contact Details:</b> ${contact_details ? contact_details : ''}
-      </h6>
-      `; 
-
-      cardExtra.innerText = row.latitude ? `Lat: ${row.latitude}, Lng: ${row.latitude}`: '';
-
-      cardText.innerText = cardDetails;
-
-      dataView.appendChild(cardClone);
-
-      if (row.latitude) { // make a map out of it as well
-        alertsList.push({
-          position: {'lat': parseFloat(row.latitude), 'lng': parseFloat(row.longitude)},
-          title: `${name}`,
-          contextString: contextString
-        })
-      }
-    });
-
-    console.log(alertsList);
-
-    // updateMainMap(alertsList);
-
-    card.style.display = 'none'; // hide template card
-    setTimeout(() => loading.style.display = 'none', 1500);
-
-  }
-
 export default function AlertForm({loader}) {
 
-  loader.load().then(() => {
-    formMap = new google.maps.Map(document.getElementById("form-map"), {
-      center: { lat: -34.397, lng: 150.644 },
-      zoom: 8,
-    });
-  });
-
   function onSubmit() {
-    var canvas = document.getElementById('canvas');
-
     let f = document.querySelector("form");
     let fd = new FormData(f);
     let sp = new URLSearchParams(fd);
@@ -124,26 +51,26 @@ export default function AlertForm({loader}) {
         latitude = position.coords.latitude;
         longitude = position.coords.longitude;
 
-        const pos = {
-          lat: latitude,
-          lng: longitude,
-        };
+        // const pos = {
+        //   lat: latitude,
+        //   lng: longitude,
+        // };
         
-        const cityCircle = new google.maps.Circle({
-          strokeColor: "#FF0000",
-          strokeOpacity: 0.8,
-          strokeWeight: 2,
-          fillColor: "#FF0000",
-          fillOpacity: 0.35,
-          map: formMap,
-          center: pos,
-          radius: 20,
-        });
+        // const cityCircle = new google.maps.Circle({
+        //   strokeColor: "#FF0000",
+        //   strokeOpacity: 0.8,
+        //   strokeWeight: 2,
+        //   fillColor: "#FF0000",
+        //   fillOpacity: 0.35,
+        //   map: formMap,
+        //   center: pos,
+        //   radius: 20,
+        // });
 
 
-        formMap.setCenter(pos);
-        document.getElementById("form-map").style.display = 'block';
-        document.getElementById("location-btn").disabled = true;
+        // formMap.setCenter(pos);
+        // document.getElementById("form-map").style.display = 'block';
+        // document.getElementById("location-btn").disabled = true;
 
       }
 
@@ -193,14 +120,22 @@ export default function AlertForm({loader}) {
 
       </form>
       
-      <button id="location-btn" onClick="handleLocation" class="mdc-button mdc-button--raised general">
+      <button id="location-btn" onClick={handleLocation} class="mdc-button mdc-button--raised general">
         Add your Location
       </button>
       <br/>
-      <div id="form-map">MAP</div>
+
+      <MapComponent 
+      isMarkerShown
+      googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places"
+      loadingElement={<div style={{ height: `100%` }} />}
+      containerElement={<div style={{ height: `400px` }} />}
+      mapElement={<div style={{ height: `100%` }} />}
+      />
+      
       <br/>
 
-      <button id="submit-btn" onSubmit="onSubmit" class="mdc-button mdc-button--raised general">
+      <button id="submit-btn" onSubmit={onSubmit} class="mdc-button mdc-button--raised general">
         Report Crime
       </button>
     
