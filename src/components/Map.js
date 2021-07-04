@@ -43,7 +43,7 @@ export default function Map() {
       <p>The <b>red</b> markers represent lost items submitted by other finders. The  <b>blue</b> markers represent police stations fetched in the nearby area (radius of 10,000) of the map center.</p>
       <MapComponent 
       isMarkerShown
-      googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places"
+      googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyB0xyzKTLq5StKvjNC5HIuHTJRgeaz9uck&libraries=places&v=weekly"
       loadingElement={<div style={{ height: `100%` }} />}
       containerElement={<div style={{ height: `400px` }} />}
       mapElement={<div style={{ height: `100%` }} />}

@@ -3,7 +3,7 @@ import Alert from './Alert';
 
 
 export default function AlertView() {
-  let alertsList = [{ title:"Assault", uid:"MHwynXtEP6Sgf2BwIFlBeI29SfD3", postTime:"07/04/2021", contact:"12345678", description:"Suspect found.", imageUrl:"https://i.stack.imgur.com/y9DpT.jpg"}, { title:"Assault", uid:"MHwynXtEP6Sgf2BwIFlBeI29SfD3", postTime:"07/04/2021", contact:"12345678", description:"Suspect found.", imageUrl:"https://i.stack.imgur.com/y9DpT.jpg"} ];
+  let alertsList = [{ title:"Assault", uid:"MHwynXtEP6Sgf2BwIFlBeI29SfD3", postTime:"07/04/2021", contact:"12345678", description:"Suspect found.", imageUrl:"https://i.stack.imgur.com/y9DpT.jpg"}];
 
   return (
     <>

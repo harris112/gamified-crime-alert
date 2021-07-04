@@ -33,5 +33,18 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "description": "",
+  "main": "index.js",
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/harris112/gamified-crime-alert.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/harris112/gamified-crime-alert/issues"
+  },
+  "homepage": "https://github.com/harris112/gamified-crime-alert#readme"
 }
