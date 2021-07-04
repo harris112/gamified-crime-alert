@@ -31,8 +31,8 @@ function updateMainMap(alertsList) {
   last_pos = -1;
 
   if (alertsList.length == 0) {
-    status.innerText = "No alerts to populate the map.";  
-    setTimeout(() => status.style.display = "none", 10000);
+    // status.innerText = "No alerts to populate the map.";  
+    // setTimeout(() => status.style.display = "none", 10000);
   }
   else {  
 
@@ -75,9 +75,6 @@ function updateMainMap(alertsList) {
 
 function fetchPoliceStations(results, status) {
   if (status == google.maps.places.PlacesServiceStatus.OK) {
-    
-    status.innerText = `Found ${results.length} nearby police stations. Populating...`;  
-    setTimeout(() => status.style.display = "none", 10000);
 
     results.forEach(item => {
 
@@ -116,10 +113,6 @@ async function updateData() {
   dataView.innerHTML = "";
   
   const data = await db.alerts.toArray();
-
-  console.log("alerts: " + data.length);
-  status.innerText = "alerts: " + data.length;  
-  setTimeout(() => status.style.display = "none", 10000);
 
   if (data.length == 0) {
     dataView.innerHTML = "No alerts found.";
@@ -201,13 +194,13 @@ document.querySelector("#submit-btn").addEventListener("click", async (e) => {
   
   console.log(record);
 
-  db.alerts.add(record)
-  .then(() => {
-    console.log("Saved to DB.")
-    updateData();
-  })
+  // db.alerts.add(record)
+  // .then(() => {
+  //   console.log("Saved to DB.")
+  //   updateData();
+  // })
 
-  let dbc = await db.alerts.count();
+  // let dbc = await db.alerts.count();
 
   document.querySelector("#submit-btn").disabled = true;
   setTimeout(() => document.querySelector("#submit-btn").disabled = false, 3000);
