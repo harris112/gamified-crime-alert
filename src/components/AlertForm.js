@@ -1,55 +1,18 @@
 import React, {useState, useEffect} from 'react';
-import {MapComponent} from './MapComponent';
-
-let latitude;
-let longitude;
+import { Formik, Form, Field, ErrorMessage } from "formik";
+import * as Yup from "yup";
+import { MapComponent } from './MapComponent';
+import { submitAlert } from '../api/api';
+import Swal from "sweetalert2";
 
 
 export default function AlertForm({loader}) {
 
-  function onSubmit() {
-    let f = document.querySelector("form");
-    let fd = new FormData(f);
-    let sp = new URLSearchParams(fd);
-
-    let i = 0;
-    let form_data = {};
-
-    for (const [key, value] of sp.entries()) {
-      form_data[key] = value;
-      if (value == ''){
-        console.log("Field is empty.");
-      } else {
-        console.log(key, value);
-      }
-      i++;
-    }
-
-    let record = {...form_data,  latitude: latitude, longitude: longitude};
-
-    
-    console.log(record);
-
-    // db.alerts.add(record)
-    // .then(() => {
-    //   console.log("Saved to DB.")
-    //   updateData();
-    // })
-
-    // let dbc = await db.alerts.count();
-
-    document.querySelector("#submit-btn").disabled = true;
-    setTimeout(() => document.querySelector("#submit-btn").disabled = false, 3000);
-  }
-
-
-
   function handleLocation() {
-
     if('geolocation' in navigator) {
       function success(position) {
-        latitude = position.coords.latitude;
-        longitude = position.coords.longitude;
+        let latitude = position.coords.latitude;
+        let longitude = position.coords.longitude;
 
         // const pos = {
         //   lat: latitude,
@@ -80,66 +43,155 @@ export default function AlertForm({loader}) {
 
       navigator.geolocation.watchPosition(success, error, {enableHighAccuracy: false,maximumAge: 100, timeout: 5000 });
 
-    } else {
+    } 
+    else {
       alert("getCurrentPosition Error");
     }
-
   }
+
+  const Toast = Swal.mixin({
+    toast: true,
+    position: 'top-end',
+    showConfirmButton: false,
+    timer: 1500,
+    timerProgressBar: true,
+    onOpen: (toast) => {
+      toast.addEventListener('mouseenter', Swal.stopTimer)
+      toast.addEventListener('mouseleave', Swal.resumeTimer)
+    }
+  })
 
   return (
     <>
-      <form>
+      <Formik
+        initialValues={{ title: "", description: "", contact: "" }}
+        validationSchema={Yup.object({
+          title: Yup.string().required("A title is required"),
+          description: Yup.string().required("A description is required"),
+          contact: Yup.string(),
+        })}
+        onSubmit={(values, { setSubmitting }) => {
+          setTimeout(() => {
+            submitAlert(values)
+              .then((user) => {
+                setSubmitting(false);
+                Toast.fire({
+                  icon: 'success',
+                  title: 'Submitted the crime alert successfully.'
+                })
+                setTimeout(() => {
+                  window.location.replace("#home");
+                }, 1500);
+              })
+              .catch((error) => {
+                setSubmitting(false);
+                Swal.fire({
+                  title: "Unable to submit the alert.",
+                  text: error.message,
+                  icon: "error",
+                  timer: 2500
+                })
+              });
+          }, 400);
+        }}
+      >
+        {({ touched, errors, isSubmitting }) => (
+          <Form>
+            <div className="form-group">
+              <small className="form-text text-muted">
+                Title
+              </small>
+              <Field
+                type="text"
+                name="title"
+                placeholder="Enter title"
+                className={`form-control ${
+                  touched.title && errors.title ? "is-invalid" : ""
+                }`}
+              />
+              <ErrorMessage
+                component="div"
+                name="title"
+                className="invalid-feedback"
+              />
+            </div>
+            
+            <br/>
+            
+            <div className="form-group">
+              <small className="form-text text-muted">
+                Contact
+              </small>
+              <Field
+                type="text"
+                name="contact"
+                placeholder="Enter contact"
+                className={`form-control ${
+                  touched.contact && errors.contact ? "is-invalid" : ""
+                }`}
+              />
+              <ErrorMessage
+                component="div"
+                name="contact"
+                className="invalid-feedback"
+              />
+            </div>
+            
+            <br/>
 
-        <div class="form-group">
-          <h5>Name</h5>
-          <label class="mdc-text-field mdc-text-field--outlined mdc-text-field--no-label">
-            <input name="name" class="mdc-text-field__input" type="text" aria-label="Label"/>
-          </label>
-        </div>
-        <br/>
+            <div className="form-group">
+              <small className="form-text text-muted">
+                Description
+              </small>
+              <Field
+                type="text"
+                name="description"
+                placeholder="Enter description"
+                className={`form-control ${
+                  touched.description && errors.description ? "is-invalid" : ""
+                }`}
+              />
+              <ErrorMessage
+                component="div"
+                name="description"
+                className="invalid-feedback"
+              />
+            </div>
 
-        <div class="form-group">
-          <h5>Description</h5>
-          <label class="mdc-text-field mdc-text-field--outlined mdc-text-field--textarea mdc-text-field--no-label">
-            <span class="mdc-text-field__resizer">
-              <textarea name="description" class="mdc-text-field__input" rows="8" cols="40" aria-label="Label"></textarea>
-            </span>
-          </label>
-        </div>
-        <br/>
-        
-        <div class="form-group">
-          <h5>Your contact details:</h5>
-          <label class="mdc-text-field mdc-text-field--outlined mdc-text-field--no-label">
-            <input name="contact_details" class="mdc-text-field__input" type="text" name="contact_details" id="contact_details"/>
-          </label>
-        </div>
+            <br/>
+            <button id="location-btn" onClick={handleLocation} class="mdc-button mdc-button--raised general">
+              Add your Location
+            </button>
+            <br/>
 
-        <br/>
-        <br/>
+            <MapComponent 
+            isMarkerShown
+            googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyB0xyzKTLq5StKvjNC5HIuHTJRgeaz9uck&libraries=places&v=weekly"
+            loadingElement={<div style={{ height: `100%` }} />}
+            containerElement={<div style={{ height: `400px` }} />}
+            mapElement={<div style={{ height: `100%` }} />}
+            />
+            
+            <br/>
 
-      </form>
-      
-      <button id="location-btn" onClick={handleLocation} class="mdc-button mdc-button--raised general">
-        Add your Location
-      </button>
-      <br/>
 
-      <MapComponent 
-      isMarkerShown
-      googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyB0xyzKTLq5StKvjNC5HIuHTJRgeaz9uck&libraries=places&v=weekly"
-      loadingElement={<div style={{ height: `100%` }} />}
-      containerElement={<div style={{ height: `400px` }} />}
-      mapElement={<div style={{ height: `100%` }} />}
-      />
-      
-      <br/>
+            <br/>
+            <button
+              type="submit"
+              className="mdc-button mdc-button--raised general"
+              disabled={isSubmitting}
+            >
+              {isSubmitting ? 
+                <div className="spinner-border" role="status">
+                  <span className="sr-only">Loading...</span>
+                </div>
+                : "Report Crime"}
+            </button>
 
-      <button id="submit-btn" onSubmit={onSubmit} class="mdc-button mdc-button--raised general">
-        Report Crime
-      </button>
-    
-      <br/><br/><br/>
+            
+          </Form>
+        )}
+      </Formik>
     </>
   )
 }

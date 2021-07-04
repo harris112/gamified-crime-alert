@@ -1,5 +1,5 @@
 // All of the Login component's API calls and helpers go here.
-import * as firebase from "firebase/app";
+import firebase from "firebase/app";
 import "firebase/auth";
 import firebaseConfig from "./firebaseConfig";
 import "firebase/firestore";
@@ -8,26 +8,6 @@ const firebaseApp = firebase.initializeApp(firebaseConfig);
 const store = firebase.firestore();
 firebase.auth().languageCode = "en";
 
-
-/**
-* Returns the user type using user id.
-* REQUIREMENTS: user id MUST exist in doc, otherwise "requester" is returned.
-* @param uid user id (must exist in docs)
-*/
-export function getUserType(uid) {
-  return new Promise((resolve, reject) => {
-    store
-      .collection("user")
-      .doc(uid)
-      .get()
-      .then((doc) => {
-        if (doc.exists) {
-        //   resolve("donor");
-        }
-      })
-      .catch((err) => reject(err));
-  });
-}
 
 
 /**
@@ -147,5 +127,40 @@ export async function updateUserData(data, uid) {
         .doc(uid)
         .set({ ...data }, { merge: true });
 }
+
+
+export async function upvoteAlert(alertID) {
+  store
+  .collection("alert")
+  .doc(alertID)
+  .update({ upvotes: firebase.firestore.FieldValue.increment(1) });
+}
+
+
+export async function downvoteAlert(alertID) {
+  store
+  .collection("alert")
+  .doc(alertID)
+  .update({ downvotes: firebase.firestore.FieldValue.increment(1) });
+}
+
+
+export async function submitAlert(user, data) {
+  return new Promise((resolve, reject) => {
+      store
+      .collection("alert")
+      .doc(user.uid)
+      .set({
+        ...data
+      })
+      .then(() => {
+        resolve(user);
+      })
+      .catch((error) => {
+        reject(error);
+      });
+  });
+}
+
 
 export default firebaseApp;
