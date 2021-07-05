@@ -118,7 +118,7 @@ export default function Login({user}) {
           </div>
           <br/>
           <h6>New user? Join our gamified crime alert community today.</h6>
-            <button class="mdc-button mdc-button--raised general">
+            <button className="mdc-button mdc-button--raised general">
             <a data-toggle="tab" href="#register">Register</a>
             </button>
 

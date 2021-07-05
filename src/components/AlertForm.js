@@ -148,13 +148,13 @@ export default function AlertForm({loader}) {
 
               
               <div className="form-group">
-                <button id="location-btn" onClick={handleLocation} class="mdc-button mdc-button--raised general">
+                <button id="location-btn" onClick={handleLocation} className="mdc-button mdc-button--raised general">
                   <small> Add Location </small>
                 </button>
                 
                 <MapComponent 
                 isMarkerShown
-                googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyB0xyzKTLq5StKvjNC5HIuHTJRgeaz9uck&libraries=places&v=weekly"
+                googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyDljegl-khc3VGfDMlG_2BpPF21jyFy5Ss&libraries=places&v=weekly"
                 loadingElement={<div style={{ height: `100%` }} />}
                 containerElement={<div style={{ height: `400px` }} />}
                 mapElement={<div style={{ height: `100%` }} />}

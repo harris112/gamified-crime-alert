@@ -36,55 +36,55 @@ function App() {
 
   return (
     <div className="App">
-      <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
-        <a class="navbar-brand title-text" href="#home">Crime Fighters</a>
-        <button class="navbar-toggler" type="button" data-target="#collapsibleNavbar" data-toggle="collapse">
-          <span class="navbar-toggler-icon"></span>
+      <nav className="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
+        <a className="navbar-brand title-text" href="#home">Crime Fighters</a>
+        <button className="navbar-toggler" type="button" data-target="#collapsibleNavbar" data-toggle="collapse">
+          <span className="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="collapsibleNavbar">
-          <ul class="nav nav-tabs navbar-nav">
-            <li class="nav-item">
-              <a class="nav-link active" data-toggle="tab" href="#home">Home</a>
+        <div className="collapse navbar-collapse" id="collapsibleNavbar">
+          <ul className="nav nav-tabs navbar-nav">
+            <li className="nav-item">
+              <a className="nav-link active" data-toggle="tab" href="#home">Home</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" data-toggle="tab" href="#login">{user == null ? "Login" : "Profile"}</a>
+            <li className="nav-item">
+              <a className="nav-link" data-toggle="tab" href="#login">{user == null ? "Login" : "Profile"}</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" data-toggle="tab" href="#form">Report a Crime</a>
+            <li className="nav-item">
+              <a className="nav-link" data-toggle="tab" href="#form">Report a Crime</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link"data-toggle="tab" href="#view">View Crime Log</a>
+            <li className="nav-item">
+              <a className="nav-link"data-toggle="tab" href="#view">View Crime Log</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link"data-toggle="tab" href="#locate">Locate</a>
+            <li className="nav-item">
+              <a className="nav-link"data-toggle="tab" href="#locate">Locate</a>
             </li>    
           </ul>
       </div>  
     </nav>
 
-    <div class="tab-content container" id="main">
+    <div className="tab-content container" id="main">
 
-      <div id="home" class="tab-pane fade in active show">
+      <div id="home" className="tab-pane fade in active show">
         <Home user={user}/>
       </div>
 
-      <div id="login" class="tab-pane fade">
+      <div id="login" className="tab-pane fade">
         <Login user={user}/>
       </div>
 
-      <div id="register" class="tab-pane fade">
+      <div id="register" className="tab-pane fade">
         <Register user={user}/>
       </div>
 
-      <div id="view" class="tab-pane fade">
+      <div id="view" className="tab-pane fade">
         <AlertView user={user}/>
       </div>
 
-      <div id="locate" class="tab-pane fade">
+      <div id="locate" className="tab-pane fade">
         <Map user={user}/>
       </div>
 
-      <div id="form" class="tab-pane fade">
+      <div id="form" className="tab-pane fade">
         <AlertForm user={user}/>
       </div>
 
