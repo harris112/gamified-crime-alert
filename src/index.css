@@ -1,4 +1,12 @@
 
+body {
+  background-color: #222222;
+}
+
+p, div, small {
+  color: white !important;
+}
+
 a {
   color: white;
   padding: 1em 1.5em;
@@ -18,6 +26,11 @@ video {
 
 #main {
   margin-top: 80px;
+}
+
+
+#location-btn {
+  margin-bottom: 10px;
 }
 
 .tab-pane {
@@ -102,6 +115,11 @@ video {
 .mdc-button--raised.general {
   background-color: maroon !important;
 }
+
+.navbar-dark {
+  background-color: rgb(20, 20, 20) !important;
+}
+
 
 .controls {
   text-align: center;

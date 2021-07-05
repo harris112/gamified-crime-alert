@@ -4,7 +4,7 @@ import * as Yup from "yup";
 import { MapComponent } from './MapComponent';
 import { submitAlert } from '../api/api';
 import Swal from "sweetalert2";
-
+import Toast from './Toast';
 
 export default function AlertForm({loader}) {
 
@@ -49,149 +49,136 @@ export default function AlertForm({loader}) {
     }
   }
 
-  const Toast = Swal.mixin({
-    toast: true,
-    position: 'top-end',
-    showConfirmButton: false,
-    timer: 1500,
-    timerProgressBar: true,
-    onOpen: (toast) => {
-      toast.addEventListener('mouseenter', Swal.stopTimer)
-      toast.addEventListener('mouseleave', Swal.resumeTimer)
-    }
-  })
-
   return (
     <>
-      <Formik
-        initialValues={{ title: "", description: "", contact: "" }}
-        validationSchema={Yup.object({
-          title: Yup.string().required("A title is required"),
-          description: Yup.string().required("A description is required"),
-          contact: Yup.string(),
-        })}
-        onSubmit={(values, { setSubmitting }) => {
-          setTimeout(() => {
-            submitAlert(values)
-              .then((user) => {
-                setSubmitting(false);
-                Toast.fire({
-                  icon: 'success',
-                  title: 'Submitted the crime alert successfully.'
+      <div className="container">
+      <h3>Report a Crime</h3>
+      <p>When a criminal activity is suspected, members are encouraged to report to authorities, and not to intervene. <br/><i>Any false reports will be downvoted and bad reputation can lead to an account ban so please refrain from such activity.</i></p>
+      <div className="formik">
+        <Formik
+          initialValues={{ title: "", description: "", contact: ""}}
+          validationSchema={Yup.object({
+            name: Yup.string().required("Please give an appropriate title and category to the alert."),
+            description: Yup.string().required("A complete description about the crime details and the suspect you witnessed is required."),
+            contact: Yup.string().required("Contact details are required for community verification and for the legal enforcement authorities."),
+          })}
+          onSubmit={(values, { setSubmitting }) => {
+            setTimeout(() => {
+              submitAlert(values.title, values.description, values.contact)
+                .then((user) => {
+                  setSubmitting(false);
+                  Toast.fire({
+                    icon: 'success',
+                    title: 'Submitted the crime alert successfully.'
+                  })
+                  setTimeout(() => {
+                    window.location.reload();
+                  }, 1500);
                 })
-                setTimeout(() => {
-                  window.location.replace("#home");
-                }, 1500);
-              })
-              .catch((error) => {
-                setSubmitting(false);
-                Swal.fire({
-                  title: "Unable to submit the alert.",
-                  text: error.message,
-                  icon: "error",
-                  timer: 2500
-                })
-              });
-          }, 400);
-        }}
-      >
-        {({ touched, errors, isSubmitting }) => (
-          <Form>
-            <div className="form-group">
-              <small className="form-text text-muted">
-                Title
-              </small>
-              <Field
-                type="text"
-                name="title"
-                placeholder="Enter title"
-                className={`form-control ${
-                  touched.title && errors.title ? "is-invalid" : ""
-                }`}
-              />
-              <ErrorMessage
-                component="div"
-                name="title"
-                className="invalid-feedback"
-              />
-            </div>
-            
-            <br/>
-            
-            <div className="form-group">
-              <small className="form-text text-muted">
-                Contact
-              </small>
-              <Field
-                type="text"
-                name="contact"
-                placeholder="Enter contact"
-                className={`form-control ${
-                  touched.contact && errors.contact ? "is-invalid" : ""
-                }`}
-              />
-              <ErrorMessage
-                component="div"
-                name="contact"
-                className="invalid-feedback"
-              />
-            </div>
-            
-            <br/>
+                .catch((error) => {
+                  setSubmitting(false);
+                  Swal.fire({
+                    title: "Invalid details. Please try again.",
+                    text: error.message,
+                    icon: "error",
+                    timer: 2500
+                  })
+                });
+            }, 400);
+          }}
+        >
+          {({ touched, errors, isSubmitting }) => (
+            <Form className="spaced-form">
+              <div className="form-group">
+                <small>
+                  Title
+                </small>
+                <Field
+                  type="text"
+                  name="title"
+                  placeholder="Enter title"
+                  className={`form-control ${
+                    touched.title && errors.title ? "is-invalid" : ""
+                  }`}
+                />
+                <ErrorMessage
+                  component="div"
+                  name="title"
+                  className="invalid-feedback"
+                />
+              </div>
 
-            <div className="form-group">
-              <small className="form-text text-muted">
-                Description
-              </small>
-              <Field
-                type="text"
-                name="description"
-                placeholder="Enter description"
-                className={`form-control ${
-                  touched.description && errors.description ? "is-invalid" : ""
-                }`}
-              />
-              <ErrorMessage
-                component="div"
-                name="description"
-                className="invalid-feedback"
-              />
-            </div>
+              <div className="form-group">
+                <small>
+                  Description
+                </small>
+                <Field
+                  type="text"
+                  name="description"
+                  placeholder="Enter description"
+                  className={`form-control ${
+                    touched.description && errors.description ? "is-invalid" : ""
+                  }`}
+                />
+                <ErrorMessage
+                  component="div"
+                  name="description"
+                  className="invalid-feedback"
+                />
+              </div>
 
-            <br/>
-            <button id="location-btn" onClick={handleLocation} class="mdc-button mdc-button--raised general">
-              Add your Location
-            </button>
-            <br/>
+              <div className="form-group">
+                <small>
+                  Contact
+                </small>
+                <Field
+                  type="text"
+                  name="contact"
+                  placeholder="Enter contact details"
+                  className={`form-control ${
+                    touched.contact && errors.contact ? "is-invalid" : ""
+                  }`}
+                />
+                <ErrorMessage
+                  component="div"
+                  name="contact"
+                  className="invalid-feedback"
+                />
+              </div>
 
-            <MapComponent 
-            isMarkerShown
-            googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyB0xyzKTLq5StKvjNC5HIuHTJRgeaz9uck&libraries=places&v=weekly"
-            loadingElement={<div style={{ height: `100%` }} />}
-            containerElement={<div style={{ height: `400px` }} />}
-            mapElement={<div style={{ height: `100%` }} />}
-            />
-            
-            <br/>
+              
+              <div className="form-group">
+                <button id="location-btn" onClick={handleLocation} class="mdc-button mdc-button--raised general">
+                  <small> Add Location </small>
+                </button>
+                
+                <MapComponent 
+                isMarkerShown
+                googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyB0xyzKTLq5StKvjNC5HIuHTJRgeaz9uck&libraries=places&v=weekly"
+                loadingElement={<div style={{ height: `100%` }} />}
+                containerElement={<div style={{ height: `400px` }} />}
+                mapElement={<div style={{ height: `100%` }} />}
+                />
+              </div>
 
 
-            <br/>
-            <button
-              type="submit"
-              className="mdc-button mdc-button--raised general"
-              disabled={isSubmitting}
-            >
-              {isSubmitting ? 
-                <div className="spinner-border" role="status">
-                  <span className="sr-only">Loading...</span>
-                </div>
-                : "Report Crime"}
-            </button>
+              <br/>
+              <button
+                type="submit"
+                className="mdc-button mdc-button--raised general"
+                disabled={isSubmitting}
+              >
+                {isSubmitting ? 
+                  <div id="login-spinner" className="spinner-border" role="status"></div>
+                  : "Register"}
+              </button>
 
-            
-          </Form>
-        )}
-      </Formik>
+              
+            </Form>
+          )}
+        </Formik>
+      </div>
+      </div>
     </>
   )
 }

@@ -9,20 +9,17 @@ const store = firebase.firestore();
 firebase.auth().languageCode = "en";
 
 
-
-/**
- * Logs in user. Returns a promise that resolves to user if successful
- * or rejects with error.
- * @param email User email address
- * @param password User password
- */
 export async function login(email, password) {
   return new Promise((resolve, reject) => {
     firebaseApp
       .auth()
       .signInWithEmailAndPassword(email, password)
-      .then(async (resp) => {        
-        resolve(resp.user); // until login option selected do not proceed
+      .then(async (resp) => {    
+        getLoggedInUser()
+        .then(async (user) => {
+          let details = await getUserDetails(user.uid);
+          resolve({ ...user, ...details });
+        });    
       })
       .catch((error) => {
         console.log("Login failed: ", error.message);
@@ -41,34 +38,33 @@ export async function logout() {
     .signOut()
     .then(() => {
       console.log("Successful log out");
+      window.location.replace("#home");
+      window.location.reload();
     })
     .catch((err) => {
       console.log("Logout failed ", err);
     });
 }
 
-/**
- * Registers user by making its account and storing in database. User
- * is also signed in.
- * @param registrationData Object containing name, email and password of user
- */
-export async function register(registrationData) {
+export async function register(email, password, name, image_url) {
   return new Promise((resolve, reject) => {
     firebaseApp
       .auth()
       .createUserWithEmailAndPassword(
-        registrationData.email,
-        registrationData.password
+        email,
+        password
       )
       .then((resp) => {
-        const { password, ...data } = registrationData;
-        
         setTimeout(() => {
           store
             .collection("user")
             .doc(resp.user.uid)
             .set({
-              ...data
+              email, name, image_url,
+              uid: resp.user.uid,
+              coins: 0,
+              rep: 0,
+              rank: 'Beginner'
             })
             .then(() => {
               resolve(resp.user);

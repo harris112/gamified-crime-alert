@@ -5,6 +5,7 @@ import AlertView from './components/AlertView';
 import Map from './components/Map';
 import AlertForm from './components/AlertForm';
 import Login from './components/Login';
+import Register from './components/Register';
 import { getLoggedInUser, getUserDetails } from "./api/api";
 
 
@@ -16,10 +17,8 @@ function App() {
   useEffect(() => {
     getLoggedInUser()
       .then(async (user) => {
-        // Setting user type
-        let details;
-        details = await getUserDetails(user.uid);
-        setUser({ ...user, details });
+        let details = await getUserDetails(user.uid);
+        setUser({ ...user, ...details });
         setAuthStatusLoaded(true);
       })
       .catch(() => {
@@ -31,16 +30,14 @@ function App() {
   // if authentication has not been loaded yet
   if (!authStatusLoaded) {
     return (
-      <div>
-        <p>Loading...</p>
-      </div>
+      <div id="loading-spinner" className="spinner-border" role="status"></div>
     );
   }
 
   return (
     <div className="App">
       <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
-        <a class="navbar-brand" href="#home">Gamified Crime Alert Portal</a>
+        <a class="navbar-brand title-text" href="#home">Crime Fighters</a>
         <button class="navbar-toggler" type="button" data-target="#collapsibleNavbar" data-toggle="collapse">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -50,7 +47,7 @@ function App() {
               <a class="nav-link active" data-toggle="tab" href="#home">Home</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" data-toggle="tab" href="#login">Login</a>
+              <a class="nav-link" data-toggle="tab" href="#login">{user == null ? "Login" : "Profile"}</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" data-toggle="tab" href="#form">Report a Crime</a>
@@ -75,10 +72,10 @@ function App() {
         <Login user={user}/>
       </div>
 
-      {/* <div id="register" class="tab-pane fade in active show">
+      <div id="register" class="tab-pane fade">
         <Register user={user}/>
-      </div> */}
-      
+      </div>
+
       <div id="view" class="tab-pane fade">
         <AlertView user={user}/>
       </div>
