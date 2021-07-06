@@ -3,6 +3,7 @@ import Alert from './Alert';
 import { getAllAlerts } from '../api/api';
 
 export default function AlertView({user, loading, alertsList}) {
+
   return (
     <>
       <h3>Crime Logs</h3>
@@ -18,11 +19,13 @@ export default function AlertView({user, loading, alertsList}) {
         </div>
         : alertsList.length === 0 ? 
         <p>No alerts to display.</p> :
-        alertsList.map(({id, title, post_time, votes, location, contact, description, uid}) =>
+        alertsList.map(({id, title, post_time, votes, location, contact, description, uid, uname, ucolor}) =>
             <Alert 
             id={id}
             title={title}
             uid={uid}
+            uname={uname}
+            ucolor={ucolor}
             user_uid={user.uid}
             post_time={post_time}
             votes={votes} 

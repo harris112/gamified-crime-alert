@@ -6,6 +6,7 @@ import Map from './components/Map';
 import AlertForm from './components/AlertForm';
 import Login from './components/Login';
 import Register from './components/Register';
+import Shop from './components/Shop';
 import { getLoggedInUser, getUserDetails, getAllAlerts } from "./api/api";
 
 
@@ -71,6 +72,9 @@ function App() {
             <li className="nav-item">
               <a className="nav-link"data-toggle="tab" href="#locate">Locate</a>
             </li>    
+            <li className="nav-item">
+              <a className="nav-link"data-toggle="tab" href="#shop">Shop</a>
+            </li>   
           </ul>
       </div>  
     </nav>
@@ -100,6 +104,11 @@ function App() {
       <div id="form" className="tab-pane fade">
         <AlertForm user={user}/>
       </div>
+
+      <div id="shop" className="tab-pane fade">
+        <Shop user={user}/>
+      </div>
+
 
     </div>
 

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { upvoteAlert, downvoteAlert, downvoteFromUpvoteAlert, upvoteFromDownvoteAlert, removeDownvote, removeUpvote } from '../api/api';
 
-export default function Alert({id, title, post_time, votes, contact, description, user_uid, uid, location, upvoted, downvoted}) {
+export default function Alert({id, title, post_time, votes, contact, description, user_uid, uid, uname, ucolor, location, upvoted, downvoted}) {
   const [upvotedState, setUpvotedState] = useState(upvoted);
   const [downvotedState, setDownvotedState] = useState(downvoted);
   const [votesState, setVotesState] = useState(votes);
@@ -55,6 +55,7 @@ export default function Alert({id, title, post_time, votes, contact, description
   return (
     <div className="card" >
       <div className="card-body">
+        <h6 className="card-subtitle2" style={{color: ucolor}}>{uname}</h6>
         <h5 className="card-title">{title}</h5>
         <h6 className="card-subtitle">{post_time}</h6>
         <p className="card-text">{description}</p>

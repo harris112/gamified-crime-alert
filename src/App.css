@@ -39,7 +39,7 @@
 }
 
 .stat-item-marked {
-    color: palevioletred;
+    color: lightcoral;
     padding: 5px;
     background-color: rgba(0,0,0,0);
     border-radius: 50%;
@@ -49,7 +49,7 @@
 }
 
 .stat-item:hover {
-    color: palevioletred;
+    color: lightcoral;
 }
 
 
@@ -68,8 +68,14 @@
 }
 
 .card-subtitle {
-    color: palevioletred;
+    color: lightcoral;
     font-size: 0.7rem;
+}
+
+
+.card-subtitle2 {
+    font-size: 0.8rem;
+    float: right;
 }
 
 .card-text {
@@ -93,4 +99,33 @@
     float: right;
     color: lightgray !important;
     font-size: 0.7rem;
+}
+
+.shop-card-img {
+    width: 298px;
+    height: 20  0px;
+    object-fit: cover;
+}
+
+.shop-card {
+    width: 300px;
+    margin-right: 20px;
+}
+
+.shop-card-text {
+    font-size: 0.8rem;  
+}
+
+.shop-btn {
+    background-color: maroon;
+    font-size: 0.8rem;
+}
+
+.shop-btn:hover {
+    background-color: #bb0000;
+}
+
+.shop-card-body {
+    width: 300px;
+    height: 215px;  
 }

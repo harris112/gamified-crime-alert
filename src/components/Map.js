@@ -18,7 +18,7 @@ export default function Map({user, alertsList, loading}) {
   return (
     <>
       <h3>Locate</h3>
-      <p>The <b>markers</b> represent all crime alerts submitted by other Crime Fighters. Click on each to view more.</p>
+      <p>The <b>markers</b> represent all crime alerts submitted by other Crime Fighters.</p>
       {
         (!loading && alertsList.length !== 0) &&
         <MainMap 
