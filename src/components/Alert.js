@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { upvoteAlert, downvoteAlert, downvoteFromUpvoteAlert, upvoteFromDownvoteAlert, removeDownvote, removeUpvote } from '../api/api';
 
-export default function Alert({id, title, post_time, votes, contact, description, user_uid, uid, uname, ucolor, location, upvoted, downvoted}) {
+export default function Alert({id, title, post_time, votes, contact, description, user_uid, uid, comments, uname, ucolor, location, upvoted, downvoted}) {
   const [upvotedState, setUpvotedState] = useState(upvoted);
   const [downvotedState, setDownvotedState] = useState(downvoted);
   const [votesState, setVotesState] = useState(votes);
+  const [commentsOpen, setCommentsOpen] = useState(false);
   
   useEffect(() => {
     setUpvotedState(upvoted);
@@ -53,6 +54,7 @@ export default function Alert({id, title, post_time, votes, contact, description
   }
 
   return (
+    <>
     <div className="card" >
       <div className="card-body">
         <h6 className="card-subtitle2" style={{color: ucolor}}>{uname}</h6>
@@ -70,7 +72,23 @@ export default function Alert({id, title, post_time, votes, contact, description
         
         <button onClick={handleUpvote} class={upvotedState === true ? "stat-item-marked" : "stat-item"}> <i class="fa fa-thumbs-up icon"></i></button> &nbsp;{votesState}&nbsp;&nbsp;
         <button onClick={handleDownvote} class={downvotedState === true ? "stat-item-marked" : "stat-item"}> <i class="fa fa-thumbs-down icon"></i></button>
+
+        &nbsp;&nbsp;
+        <button id="comment-btn" onClick={() => setCommentsOpen(!commentsOpen)} class={commentsOpen ? "stat-item-marked" : "stat-item"}> <i class="fa fa-comments icon"></i></button>
       </div>
     </div>
+      {
+        commentsOpen &&
+        comments.map(({description, post_time, uid, uname, ucolor}) => {
+          return (
+          <div className="comment-body">
+            <h6 className="comment-name" style={{color: ucolor}} >{uname}</h6>
+            <h6 className="comment-time" >{post_time.toDate().toLocaleString()}</h6>
+            <h5 className="comment-desc">{description}</h5>
+          </div>
+          );
+        })
+      }
+    </>
   )
 }

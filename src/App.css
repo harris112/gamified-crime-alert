@@ -129,3 +129,31 @@
     width: 300px;
     height: 215px;  
 }
+
+.comment-body {
+    margin-top: -25px;
+    padding-left: 10px;
+    padding-bottom: 10px;
+    padding-top: 13px;
+    background-color: #331111;
+
+}
+
+#comment-btn {
+    float:right;
+    margin-right: 1%;
+}
+
+.comment-name {
+    font-size: 0.9rem;
+}
+
+.comment-time {
+    font-size: 0.5rem;
+    color: lightgrey;
+    margin-top: -3px; 
+}
+
+.comment-desc {
+    font-size: 0.9rem;
+}

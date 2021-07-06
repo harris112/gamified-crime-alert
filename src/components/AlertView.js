@@ -19,13 +19,14 @@ export default function AlertView({user, loading, alertsList}) {
         </div>
         : alertsList.length === 0 ? 
         <p>No alerts to display.</p> :
-        alertsList.map(({id, title, post_time, votes, location, contact, description, uid, uname, ucolor}) =>
+        alertsList.map(({id, title, post_time, votes, location, contact, description, comments, uid, uname, ucolor}) =>
             <Alert 
             id={id}
             title={title}
             uid={uid}
             uname={uname}
             ucolor={ucolor}
+            comments={comments}
             user_uid={user.uid}
             post_time={post_time}
             votes={votes} 

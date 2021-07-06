@@ -16,14 +16,15 @@ export default function AlertForm({user}) {
       function success(position) {
         let lat = position.coords.latitude;
         let lng = position.coords.longitude;
-
-        setLocation(new firebase.firestore.GeoPoint(lat, lng));
+        
+        const gp = new firebase.firestore.GeoPoint(lat, lng);
+        setLocation(gp);
       }
 
       function error() {
         alert('Sorry, no position available.');
       }
-      navigator.geolocation.watchPosition(success, error, {enableHighAccuracy: false,maximumAge: 100, timeout: 5000 });
+      navigator.geolocation.getCurrentPosition(success, error);
     } 
     else {
       alert("getCurrentPosition Error");
@@ -52,7 +53,7 @@ export default function AlertForm({user}) {
                 post_time: new Date().toLocaleString(),
                 uid: user.uid,
                 votes: 0,
-                location
+                location: location
                 };
 
               console.log(alertData);
@@ -120,6 +121,23 @@ export default function AlertForm({user}) {
               </div>
 
               <div className="form-group">
+                <button id="location-btn" onClick={handleLocation} className="mdc-button mdc-button--raised general">
+                  <small> Add Location </small>
+                </button>
+                {
+                  location !== undefined && location !== null &&
+                  <MapComponent 
+                  isMarkerShown
+                  googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyDljegl-khc3VGfDMlG_2BpPF21jyFy5Ss&libraries=places&v=weekly"
+                  location={location}
+                  loadingElement={<div style={{ height: `100%` }} />}
+                  containerElement={<div style={{ height: `400px` }} />}
+                  mapElement={<div style={{ height: `100%` }} />}
+                  />
+                }
+              </div>
+
+              <div className="form-group">
                 <small>
                   Contact
                 </small>
@@ -136,24 +154,6 @@ export default function AlertForm({user}) {
                   name="contact"
                   className="invalid-feedback"
                 />
-              </div>
-
-              
-              <div className="form-group">
-                <button id="location-btn" onClick={handleLocation} className="mdc-button mdc-button--raised general">
-                  <small> Add Location </small>
-                </button>
-                {
-                  location !== undefined && location !== null &&
-                  <MapComponent 
-                  isMarkerShown
-                  googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyDljegl-khc3VGfDMlG_2BpPF21jyFy5Ss&libraries=places&v=weekly"
-                  location={location}
-                  loadingElement={<div style={{ height: `100%` }} />}
-                  containerElement={<div style={{ height: `400px` }} />}
-                  mapElement={<div style={{ height: `100%` }} />}
-                  />
-                }
               </div>
 
               <button type="submit" className="mdc-button mdc-button--raised general" disabled={isSubmitting}>

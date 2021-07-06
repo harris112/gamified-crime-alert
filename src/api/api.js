@@ -105,6 +105,26 @@ export async function getUserDetails(uid) {
     });
 }
 
+export async function getAlertComments(alertId) {
+  return new Promise((resolve, reject) => {
+      store
+      .collection("comment")
+      .where('alert_id','==',alertId)
+      .get()
+      .then((snapshot) => {
+          if (snapshot.empty) {
+            resolve([]);
+          }
+          else {
+            resolve(snapshot.docs.map(docs => docs.data()));
+          }  
+      })
+      .catch((err) => {
+          reject(err);
+      });
+  });
+}
+
 export async function getAllAlerts() {
   const querySnapshot = await store.collection("alert").get();
   
@@ -116,9 +136,17 @@ export async function getAllAlerts() {
   return Promise.all(alertsList.map(async alert => {
     const user = await getUserDetails(alert.uid);
     const rankIndex = Math.min(Math.floor(user.rep / 200), rankList.length-1);
-    console.log(rankIndex);
     alert.uname = user.name;
     alert.ucolor = rankColor[rankIndex];
+
+    const comments = await getAlertComments(alert.id);
+    alert.comments = await Promise.all(comments.map(async comment => {
+      const user = await getUserDetails(comment.uid);
+      const rankIndex = Math.min(Math.floor(user.rep / 200), rankList.length-1);
+      comment.uname = user.name;
+      comment.ucolor = rankColor[rankIndex];
+      return comment;
+    }));
     return alert;
   }));
 }

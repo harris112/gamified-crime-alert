@@ -18,7 +18,7 @@ export const MapComponent = withScriptjs(withGoogleMap(({isMarkerShown, location
 export const MainMap = withScriptjs(withGoogleMap(({markerList, location}) => {
   
   return <GoogleMap
-      defaultZoom={15}
+      defaultZoom={5}
       defaultCenter={{ lat: location.latitude, lng: location.longitude }}
     >
     { 

@@ -2,7 +2,7 @@ import React from "react";
 import { logout, rankList, rankColor } from "../api/api";
 
 
-export default function Profile({name, image_url, email, rank, rep, coins}) {
+export default function Profile({name, image_url, email, rep, coins}) {
     const rankIndex = Math.min(Math.floor(rep / 200), rankList.length-1);
     return (
       <div className="d-flex flex-column justify-content-center align-items-center">

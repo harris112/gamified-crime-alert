@@ -28,11 +28,6 @@ video {
   margin-top: 80px;
 }
 
-
-#location-btn {
-  margin-bottom: 10px;
-}
-
 .tab-pane {
   align-self: left;
   align-content: left;
@@ -83,16 +78,4 @@ video {
 
 .navbar-dark {
   background-color: rgb(20, 20, 20) !important;
-}
-
-
-.controls {
-  text-align: center;
-  padding: 0.5em 0;
-  background: #333e5a;
-}
-
-.facebook_theme{
- background-color: #333e5a;
- float: right;
 }
