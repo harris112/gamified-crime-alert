@@ -58,6 +58,7 @@ export default function Alert({id, title, post_time, votes, contact, description
         <h5 className="card-title">{title}</h5>
         <h6 className="card-subtitle">{post_time}</h6>
         <p className="card-text">{description}</p>
+
         <div className="card-minor">
           <div className="card-extra">{contact}</div>
           {
@@ -65,6 +66,7 @@ export default function Alert({id, title, post_time, votes, contact, description
             <div className="card-loc">{location.latitude}, {location.longitude}</div>
           }
         </div>
+        
         <button onClick={handleUpvote} class={upvotedState === true ? "stat-item-marked" : "stat-item"}> <i class="fa fa-thumbs-up icon"></i></button> &nbsp;{votesState}&nbsp;&nbsp;
         <button onClick={handleDownvote} class={downvotedState === true ? "stat-item-marked" : "stat-item"}> <i class="fa fa-thumbs-down icon"></i></button>
       </div>
