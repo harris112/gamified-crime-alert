@@ -27,3 +27,70 @@
 .spaced-form > .form-group {
     margin-bottom: 20px;
 }
+  
+.stat-item {
+    color: white;
+    padding: 5px;
+    background-color: rgba(0,0,0,0);
+    border-radius: 50%;
+    width: 2.5rem;
+    height: 2.5rem;
+    margin-top: 5px;
+}
+
+.stat-item-marked {
+    color: palevioletred;
+    padding: 5px;
+    background-color: rgba(0,0,0,0);
+    border-radius: 50%;
+    width: 2.5rem;
+    height: 2.5rem;
+    margin-top: 5px;
+}
+
+.stat-item:hover {
+    color: palevioletred;
+}
+
+
+.card-body {
+    background-color: rgb(20,20,20);
+}
+
+.card-img {
+    width: 20vh;
+    height:20vh;
+    object-fit: cover;
+}
+
+.card {
+    margin-bottom: 3%;
+}
+
+.card-subtitle {
+    color: palevioletred;
+    font-size: 0.7rem;
+}
+
+.card-text {
+    word-wrap: normal;
+    font-size: medium;
+    margin-top: 15px;
+}
+
+.card-minor {
+    float: right;
+}
+
+.card-loc {
+    text-align: right;
+    color: gray !important;
+    font-size: 0.7rem;
+}
+
+.card-extra {
+    text-align: right;
+    float: right;
+    color: lightgray !important;
+    font-size: 0.7rem;
+}

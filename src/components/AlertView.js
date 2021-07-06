@@ -1,36 +1,39 @@
 import React, {useState, useEffect} from 'react';
 import Alert from './Alert';
+import { getAllAlerts } from '../api/api';
 
-
-export default function AlertView() {
-  let alertsList = [{ title:"Assault", uid:"MHwynXtEP6Sgf2BwIFlBeI29SfD3", postTime:"07/04/2021", contact:"12345678", description:"Suspect found.", imageUrl:"https://i.stack.imgur.com/y9DpT.jpg"}];
-
+export default function AlertView({user, loading, alertsList}) {
   return (
     <>
+      <h3>Crime Logs</h3>
+      <p>Displaying all posted crime alerts. <i>Be cautious of any fake alerts and report them to us.</i></p>
       {
-        alertsList.length === 0 ? 
-        <p>No alerts to display.</p> :
-        alertsList.map(({title, postTime, contact, description, imageUrl, uid}) =>
-            <Alert 
-            title={title}
-            uid={uid}
-            postTime={postTime}
-            contact={contact}
-            description={description}
-            imageUrl={imageUrl}
-            />
-        )
-      }
-      
-
-      <div id="loading">
-        <div className="d-flex justify-content-center">
-          <div className="spinner-border" role="status">
+        user == null ? "Please login to view our alerts."
+        : loading ?        
+        <div id="loading">
+          <div className="d-flex justify-content-center">
+            <div className="spinner-border" role="status">
+            </div>
           </div>
         </div>
-      </div>
-
-      <div id="data"></div>
+        : alertsList.length === 0 ? 
+        <p>No alerts to display.</p> :
+        alertsList.map(({id, title, post_time, votes, location, contact, description, uid}) =>
+            <Alert 
+            id={id}
+            title={title}
+            uid={uid}
+            user_uid={user.uid}
+            post_time={post_time}
+            votes={votes} 
+            location={location}
+            contact={contact}
+            description={description}
+            upvoted={user.upvotes_list.includes(id)}
+            downvoted={user.downvotes_list.includes(id)}
+            />
+        )
+      }      
     </>
   )
 }

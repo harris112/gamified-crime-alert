@@ -6,12 +6,15 @@ import Map from './components/Map';
 import AlertForm from './components/AlertForm';
 import Login from './components/Login';
 import Register from './components/Register';
-import { getLoggedInUser, getUserDetails } from "./api/api";
+import { getLoggedInUser, getUserDetails, getAllAlerts } from "./api/api";
 
 
 function App() {
   const [authStatusLoaded, setAuthStatusLoaded] = useState(false); // used to wait if any user is logged in
   const [user, setUser] = useState(null);
+  const [alertsList, setAlertList] = useState([]);
+  const [loading, setLoading] = useState(true);
+
 
   // Setting user state if user logged in.
   useEffect(() => {
@@ -24,6 +27,16 @@ function App() {
       .catch(() => {
         setUser(null);
         setAuthStatusLoaded(true);
+      });
+    
+    getAllAlerts()
+    .then(async (alertDocs) => {
+        setAlertList(alertDocs);
+        setLoading(false);
+      })
+      .catch(() => {
+        setAlertList([]);
+        setLoading(false);
       });
   }, []);
 
@@ -77,11 +90,11 @@ function App() {
       </div>
 
       <div id="view" className="tab-pane fade">
-        <AlertView user={user}/>
+        <AlertView user={user} alertsList={alertsList} loading={loading}/>
       </div>
 
       <div id="locate" className="tab-pane fade">
-        <Map user={user}/>
+        <Map user={user} alertsList={alertsList} loading={loading}/>
       </div>
 
       <div id="form" className="tab-pane fade">

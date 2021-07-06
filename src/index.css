@@ -53,25 +53,6 @@ video {
   margin-right: 10px;
 }
 
-#form-map {
-  margin: 2%;
-  height: 60vh;
-  width: 80vw;
-  position: relative;
-  display: none;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-#main-map {
-  margin: 2%;
-  height: 85vh;
-  width: 80vw;
-  position: relative;
-  margin-left: auto;
-  margin-right: auto;
-}
-
 .home-banner {
   width: 30vw;
   height: 40vh;
@@ -86,22 +67,6 @@ video {
 
 .navbar-brand {
   margin-left: 5%;
-}
-
-.card-extra {
-  color: #7A7;
-}
-
-.card-img {
-  width: 20vh;
-  height:20vh;
-  object-fit: cover;
-}
-
-.marker-img {
-  width: 20vh;
-  height:20vh;
-  object-fit: cover;
 }
 
 .nav-link.active {
