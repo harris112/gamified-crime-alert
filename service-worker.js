@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/gamified-crime-alert/precache-manifest.addd7649b3790442f8c39508f246c0b2.js"
+  "/gamified-crime-alert/precache-manifest.8cadb7587d7783475548be265652acd1.js"
 );
 
 self.addEventListener('message', (event) => {

@@ -1,21 +1,21 @@
 {
   "files": {
-    "main.css": "/gamified-crime-alert/static/css/main.7edd2b39.chunk.css",
-    "main.js": "/gamified-crime-alert/static/js/main.4c7a3e2c.chunk.js",
-    "main.js.map": "/gamified-crime-alert/static/js/main.4c7a3e2c.chunk.js.map",
+    "main.css": "/gamified-crime-alert/static/css/main.fdda6684.chunk.css",
+    "main.js": "/gamified-crime-alert/static/js/main.f7cceb5d.chunk.js",
+    "main.js.map": "/gamified-crime-alert/static/js/main.f7cceb5d.chunk.js.map",
     "runtime-main.js": "/gamified-crime-alert/static/js/runtime-main.14571150.js",
     "runtime-main.js.map": "/gamified-crime-alert/static/js/runtime-main.14571150.js.map",
-    "static/js/2.62604c74.chunk.js": "/gamified-crime-alert/static/js/2.62604c74.chunk.js",
-    "static/js/2.62604c74.chunk.js.map": "/gamified-crime-alert/static/js/2.62604c74.chunk.js.map",
+    "static/js/2.f7b6eb1e.chunk.js": "/gamified-crime-alert/static/js/2.f7b6eb1e.chunk.js",
+    "static/js/2.f7b6eb1e.chunk.js.map": "/gamified-crime-alert/static/js/2.f7b6eb1e.chunk.js.map",
     "index.html": "/gamified-crime-alert/index.html",
-    "precache-manifest.addd7649b3790442f8c39508f246c0b2.js": "/gamified-crime-alert/precache-manifest.addd7649b3790442f8c39508f246c0b2.js",
+    "precache-manifest.8cadb7587d7783475548be265652acd1.js": "/gamified-crime-alert/precache-manifest.8cadb7587d7783475548be265652acd1.js",
     "service-worker.js": "/gamified-crime-alert/service-worker.js",
-    "static/css/main.7edd2b39.chunk.css.map": "/gamified-crime-alert/static/css/main.7edd2b39.chunk.css.map"
+    "static/css/main.fdda6684.chunk.css.map": "/gamified-crime-alert/static/css/main.fdda6684.chunk.css.map"
   },
   "entrypoints": [
     "static/js/runtime-main.14571150.js",
-    "static/js/2.62604c74.chunk.js",
-    "static/css/main.7edd2b39.chunk.css",
-    "static/js/main.4c7a3e2c.chunk.js"
+    "static/js/2.f7b6eb1e.chunk.js",
+    "static/css/main.fdda6684.chunk.css",
+    "static/js/main.f7cceb5d.chunk.js"
   ]
 }
