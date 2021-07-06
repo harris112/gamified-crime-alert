@@ -312,7 +312,7 @@ export async function postComment(alertId, uid, comment) {
   return new Promise((resolve, reject) => {
       store
       .collection("comment")
-      .add({alert_id: alertId, uid: uid, description: comment, post_time: new Date().toString()})
+      .add({alert_id: alertId, uid: uid, description: comment, post_time: new Date().toLocaleString()})
       .then(() => {
         resolve("Posted.");
         window.location.reload();

@@ -41,7 +41,7 @@ function ShopCard({image_url, uid, ucoins, description, title, coins, due_time, 
       <p className="card-text shop-card-text">{description}</p>
       {
         due_time !== null &&
-        <p className="card-extra">Avail Until {due_time.toDate().toLocaleString().toString()}</p>
+        <p className="card-extra">Avail Until {due_time.toDate().toLocaleString()}</p>
       }
       <button onClick={handlePurchase} className="btn btn-primary shop-btn">{coins} Coins</button>
     </div>
