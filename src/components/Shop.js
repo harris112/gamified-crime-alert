@@ -70,7 +70,10 @@ export default function Shop({user}) {
   return (
     <>
       <h3>Shop</h3>
-      <p className="card-extra">Coins: {user.coins}</p>
+      {
+        user &&
+        <p className="card-extra">Coins: {user.coins}</p>
+      }
       <p>Use your hard-earned coins from crime fighting to avail coupons, discounts and protection gear. </p>
 
       <div className="row">
@@ -80,8 +83,8 @@ export default function Shop({user}) {
         shopItems.map(({title, description, coins, image_url, due_time, id}) => 
         <ShopCard 
         id={id}
-        uid={user.uid}
-        ucoins={user.coins}
+        uid={user && user.uid}
+        ucoins={user && user.coins}
         title={title}
         description={description}
         coins={coins}
