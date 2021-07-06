@@ -308,4 +308,20 @@ export async function submitAlert(uid, data) {
 }
 
 
+export async function postComment(alertId, uid, comment) {
+  return new Promise((resolve, reject) => {
+      store
+      .collection("comment")
+      .add({alert_id: alertId, uid: uid, description: comment, post_time: new Date().toString()})
+      .then(() => {
+        resolve("Posted.");
+        window.location.reload();
+      })
+      .catch((error) => {
+        reject(error);
+      });
+  });
+}
+
+
 export default firebaseApp;

@@ -131,7 +131,7 @@
 }
 
 .comment-body {
-    margin-top: -25px;
+    margin-top: 5px;
     padding-left: 10px;
     padding-bottom: 10px;
     padding-top: 13px;
@@ -156,4 +156,13 @@
 
 .comment-desc {
     font-size: 0.9rem;
+}
+
+.comment-submit {
+    margin-top: 22px;
+}
+
+.comments-list {
+    margin-top: -25px;
+    margin-bottom: 20px;
 }

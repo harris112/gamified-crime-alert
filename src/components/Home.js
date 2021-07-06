@@ -8,8 +8,8 @@ export default function Home() {
       
       <div style={{marginTop: 20}}></div>
       <button className="mdc-button mdc-button--raised general">
-      <a data-toggle="tab" href="#locate">
-        View Crime Alerts Log
+      <a data-toggle="tab" href="#view">
+        View Crime Alerts
       </a>
       </button>
 

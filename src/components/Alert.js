@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { upvoteAlert, downvoteAlert, downvoteFromUpvoteAlert, upvoteFromDownvoteAlert, removeDownvote, removeUpvote } from '../api/api';
+import { postComment, upvoteAlert, downvoteAlert, downvoteFromUpvoteAlert, upvoteFromDownvoteAlert, removeDownvote, removeUpvote } from '../api/api';
+import { Formik, Form, Field, ErrorMessage } from "formik";
+import * as Yup from "yup";
 
 export default function Alert({id, title, post_time, votes, contact, description, user_uid, uid, comments, uname, ucolor, location, upvoted, downvoted}) {
   const [upvotedState, setUpvotedState] = useState(upvoted);
@@ -77,18 +79,77 @@ export default function Alert({id, title, post_time, votes, contact, description
         <button id="comment-btn" onClick={() => setCommentsOpen(!commentsOpen)} class={commentsOpen ? "stat-item-marked" : "stat-item"}> <i class="fa fa-comments icon"></i></button>
       </div>
     </div>
+      <div className="comments-list">
+        {
+          commentsOpen &&
+          comments.map(({description, post_time, uid, uname, ucolor}) => {
+            return (
+            <div className="comment-body">
+              <h6 className="comment-name" style={{color: ucolor}} >{uname}</h6>
+              <h6 className="comment-time" >{post_time}</h6>
+              <h5 className="comment-desc">{description}</h5>
+            </div>
+            );
+          })
+        }
       {
         commentsOpen &&
-        comments.map(({description, post_time, uid, uname, ucolor}) => {
-          return (
-          <div className="comment-body">
-            <h6 className="comment-name" style={{color: ucolor}} >{uname}</h6>
-            <h6 className="comment-time" >{post_time.toDate().toLocaleString()}</h6>
-            <h5 className="comment-desc">{description}</h5>
-          </div>
-          );
-        })
+        <Formik
+          initialValues={{ comment: "" }}
+          validationSchema={Yup.object({
+            comment: Yup.string(),
+          })}
+          onSubmit={(values, { setSubmitting }) => {
+            setTimeout(() => {
+              postComment(id, uid, values.comment)
+                .then((res) => {
+                  setSubmitting(false);
+                })
+                .catch((error) => {
+                  setSubmitting(false);
+                });
+            }, 400);
+          }}
+        >
+          {({ touched, errors, isSubmitting }) => (
+            <Form>
+              <div className="row">
+
+                <div className="col-sm-8 form-group">
+                  <small>
+                    Comment
+                  </small>
+                  <Field
+                    type="text"
+                    name="comment"
+                    placeholder="Enter your comment here"
+                    className={`form-control ${
+                      touched.comment && errors.comment ? "is-invalid" : ""
+                    }`}
+                  />
+                  <ErrorMessage
+                    component="div"
+                    name="comment"
+                    className="invalid-feedback"
+                  />
+                </div>
+
+                <br/>
+                <button type="submit" className="col-sm-2 comment-submit mdc-button mdc-button--raised general" disabled={isSubmitting}
+                >
+                  {isSubmitting ? 
+                    <div id="login-spinner" className="spinner-border" role="status"></div>
+                    : "Post"}
+                </button>
+              </div>
+
+              
+            </Form>
+          )}
+        </Formik>
       }
+      </div>
+
     </>
   )
 }
