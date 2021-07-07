@@ -9,7 +9,7 @@ const store = firebase.firestore();
 firebase.auth().languageCode = "en";
 
 
-export const rankList = ['Beginner', 'Watcher', 'Patrol Guard', 'Crime Fighter', 'Bane of Justice', 'Batman'];
+export const rankList = ['Beginner', 'Watcher', 'Patrol Guard', 'Crime Fighter', 'Bane of Criminals', 'Batman'];
 export const rankColor = ['white', 'darkseagreen', 'lightblue', 'mediumpurple', 'lightcoral', 'gold'];
 
 export async function login(email, password) {

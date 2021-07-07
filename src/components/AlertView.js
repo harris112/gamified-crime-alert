@@ -33,8 +33,8 @@ export default function AlertView({user, loading, alertsList}) {
             location={location}
             contact={contact}
             description={description}
-            upvoted={user.upvotes_list.includes(id)}
-            downvoted={user.downvotes_list.includes(id)}
+            upvoted={user ? user.upvotes_list.includes(id) : false}
+            downvoted={user ? user.downvotes_list.includes(id) : false}
             />
         )
       }      
