@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "35dd1968d007007ea3081023c50ab02d",
+    "revision": "ad97e03b45ba4115058d4734d8488bec",
     "url": "/gamified-crime-alert/index.html"
   },
   {
-    "revision": "a75955acd41376fa2e0f",
+    "revision": "12a831080ee177ebd52a",
     "url": "/gamified-crime-alert/static/css/main.c6367557.chunk.css"
   },
   {
@@ -12,8 +12,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/gamified-crime-alert/static/js/2.00a428cd.chunk.js"
   },
   {
-    "revision": "a75955acd41376fa2e0f",
-    "url": "/gamified-crime-alert/static/js/main.89edf8c2.chunk.js"
+    "revision": "12a831080ee177ebd52a",
+    "url": "/gamified-crime-alert/static/js/main.eb4e8cf7.chunk.js"
   },
   {
     "revision": "53c62a9b6e5e382520e9",
