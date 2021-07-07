@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/gamified-crime-alert/static/css/main.c6367557.chunk.css",
-    "main.js": "/gamified-crime-alert/static/js/main.eb4e8cf7.chunk.js",
-    "main.js.map": "/gamified-crime-alert/static/js/main.eb4e8cf7.chunk.js.map",
+    "main.js": "/gamified-crime-alert/static/js/main.148b7010.chunk.js",
+    "main.js.map": "/gamified-crime-alert/static/js/main.148b7010.chunk.js.map",
     "runtime-main.js": "/gamified-crime-alert/static/js/runtime-main.14571150.js",
     "runtime-main.js.map": "/gamified-crime-alert/static/js/runtime-main.14571150.js.map",
     "static/js/2.00a428cd.chunk.js": "/gamified-crime-alert/static/js/2.00a428cd.chunk.js",
     "static/js/2.00a428cd.chunk.js.map": "/gamified-crime-alert/static/js/2.00a428cd.chunk.js.map",
     "index.html": "/gamified-crime-alert/index.html",
-    "precache-manifest.ae5b2a33e0a9f081589fea2f320ae1ee.js": "/gamified-crime-alert/precache-manifest.ae5b2a33e0a9f081589fea2f320ae1ee.js",
+    "precache-manifest.900bdff6f4cd8257c5fc88482a97c213.js": "/gamified-crime-alert/precache-manifest.900bdff6f4cd8257c5fc88482a97c213.js",
     "service-worker.js": "/gamified-crime-alert/service-worker.js",
     "static/css/main.c6367557.chunk.css.map": "/gamified-crime-alert/static/css/main.c6367557.chunk.css.map"
   },
@@ -16,6 +16,6 @@
     "static/js/runtime-main.14571150.js",
     "static/js/2.00a428cd.chunk.js",
     "static/css/main.c6367557.chunk.css",
-    "static/js/main.eb4e8cf7.chunk.js"
+    "static/js/main.148b7010.chunk.js"
   ]
 }
