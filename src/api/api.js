@@ -63,6 +63,8 @@ export async function register(email, password, name, image_url) {
               uid: resp.user.uid,
               coins: 100,
               rep: 0,
+              upvotes_list: [],
+              downvotes_list: []
             })
             .then(() => {
               resolve(resp.user);
